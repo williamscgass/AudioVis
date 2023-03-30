@@ -24,7 +24,7 @@ struct wave{
     float amplitude;
     float time;
 };
-const int num_waves = 10;
+const int num_waves = 50;
 uniform wave waves[num_waves];
 varying vec4 vertPos;
 varying vec3 truPos;
@@ -35,7 +35,7 @@ void main() {
     vec3 wavePos = vec3(sin(waves[i].phi) * cos(waves[i].theta), sin(waves[i].phi) * sin(waves[i].theta), cos(waves[i].phi));
     vec3 distanceVector = wavePos - truPos;
     float dist = sqrt(dot(distanceVector, distanceVector));
-    truPos = truPos * (1.0 + min(1.0, waves[i].time) * pow(cos((dist + waves[i].time - 1.0) * 2.0), 21.0)/(10.0/waves[i].amplitude * dist * pow(max(1.0, waves[i].time), 2.0)));
+    truPos = truPos * (1.0 + min(1.0, waves[i].time) * pow(cos((dist + waves[i].time - 1.0) * 2.0), 21.0)/(10.0/waves[i].amplitude * max(1.0, dist) * pow(max(1.0, waves[i].time), 2.0)));
   }
   
   vertPos = projectionMatrix * modelViewMatrix * vec4(truPos, 1.0);
@@ -54,7 +54,13 @@ const material = new THREE.ShaderMaterial({
     fragmentShader: fragmentShader,
     vertexShader: vertexShader,
     uniforms: {
-        waves: { value: [{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }] }
+        waves: {
+            value: [{ theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },
+            { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },
+            { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },
+            { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 },
+            { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }, { theta: 0, phi: 1, amplitude: 3, time: Math.random() * 10 }]
+        }
     }
 });
 
@@ -72,7 +78,7 @@ function animate() {
     requestAnimationFrame(animate);
 
     sphere.material.uniforms.waves.value.forEach(wave => { // adjust time
-        wave.time += 0.01;
+        wave.time += 0.005;
     })
 
     for (let i = 0; i < sphere.material.uniforms.waves.value.length; i++) {
