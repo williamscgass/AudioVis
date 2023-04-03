@@ -24,7 +24,7 @@ struct wave{
     float amplitude;
     float time;
 };
-const int num_waves = 50;
+const int num_waves = 20;
 uniform wave waves[num_waves];
 varying vec4 vertPos;
 varying vec3 truPos;
@@ -32,7 +32,7 @@ void main() {
   truPos = position;
 
   for (int i = 0; i < num_waves; ++i) {
-    vec3 wavePos = vec3(sin(waves[i].phi) * cos(waves[i].theta), sin(waves[i].phi) * sin(waves[i].theta), cos(waves[i].phi));
+    vec3 wavePos = vec3(2.0 * sin(waves[i].phi) * cos(waves[i].theta), 2.0 *  sin(waves[i].phi) * sin(waves[i].theta), 2.0 * cos(waves[i].phi));
     vec3 distanceVector = wavePos - truPos;
     float dist = sqrt(dot(distanceVector, distanceVector));
     truPos = truPos * (1.0 + min(1.0, waves[i].time) * pow(cos((dist + waves[i].time - 1.0) * 2.0), 21.0)/(10.0/waves[i].amplitude * max(1.0, dist) * pow(max(1.0, waves[i].time), 2.0)));
@@ -47,7 +47,7 @@ varying vec4 vertPos;
 varying vec3 truPos;
 
 void main() {
-  gl_FragColor = vec4(normalize(truPos), 1.0);
+  gl_FragColor = vec4(normalize(truPos), 1.0) + vec4(0.1, 0.1, 0.1, 1.0);
 }
 `;
 const material = new THREE.ShaderMaterial({
@@ -86,7 +86,7 @@ function animate() {
             sphere.material.uniforms.waves.value[i] = {
                 theta: Math.random() * 2 * Math.PI,
                 phi: Math.random() * Math.PI,
-                amplitude: Math.random() * 6 + 1,
+                amplitude: Math.random() * 3 + 1,
                 time: 0
             }
         }
